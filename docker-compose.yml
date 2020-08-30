@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+    geth:
+        ports:
+            - '30303:30303'
+        volumes:
+            - '~/.ethereum:/root/.ethereum'
+        image: ethereum/client-go
+        command: --testnet --rpc  --rpccorsdomain "http://geth:8545" --ws --wsaddr 0.0.0.0 --wsport 8546 --wsorigins '*' --nousb --syncmode "light"
+        restart: always
+    keep:
+        depends_on:
+            - geth
+        entrypoint: keep-client
+        ports:
+            - '3920:3919'
+        volumes:
+            - '~/.ethereum:/root/.ethereum'
+            - '~/beacon/persistence:/mnt/keep-beacon-client/persistence'
+            - '~/beacon/config:/mnt/keep-beacon-client/config'
+        environment:
+            LOG_LEVEL: debug
+            KEEP_ETHEREUM_PASSWORD: $ETH_PASSWD
+        image: keepnetwork/keep-client:v1.3.0-rc
+        command: --config /mnt/keep-beacon-client/config/config.toml start
+        restart: always
+    keep-ecdsa:
+        depends_on:
+            - geth
+        entrypoint: keep-ecdsa
+        ports:
+            - '3919:3919'
+        volumes:
+            - '~/.ethereum:/root/.ethereum'
+            - '~/ecdsa/persistence:/mnt/keep-ecdsa-client/persistence'
+            - '~/ecdsa/config:/mnt/keep-ecdsa-client/config'
+        environment:
+            LOG_LEVEL: debug
+            KEEP_ETHEREUM_PASSWORD: $ETH_PASSWD
+        image: keepnetwork/keep-ecdsa-client:v1.2.0-rc
+        command: --config /mnt/keep-ecdsa-client/config/config.toml start
+        restart: always
