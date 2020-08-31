@@ -5,8 +5,8 @@
   URLRPC = "http://geth:8545"
 
 [ethereum.account]
- Address = $KEEP_OPERATOR_ADDRESS
- KeyFile = $KEEP_OPERATOR_KEYFILE_NAME
+ Address = ${KEEP_OPERATOR_ADDRESS}
+ KeyFile = ${KEEP_OPERATOR_KEYFILE_NAME}
 
 [ethereum.ContractAddresses]
   BondedECDSAKeepFactory = "0xb37c8696cD023c11357B37b5b12A9884c9C83784"
