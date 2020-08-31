@@ -6,7 +6,7 @@
 
 [ethereum.account]
  Address = $KEEP_OPERATOR_ADDRESS
- KeyFile = /root/.ethereum/ropsten/keystore/$KEEP_OPERATOR_KEYFILE_NAME
+ KeyFile = $KEEP_OPERATOR_KEYFILE_NAME
 
 
 [ethereum.ContractAddresses]
