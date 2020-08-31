@@ -19,8 +19,8 @@ services:
             - '~/beacon/persistence:/mnt/keep-beacon-client/persistence'
             - '~/beacon/config:/mnt/keep-beacon-client/config'
         environment:
-            LOG_LEVEL: info
-            KEEP_ETHEREUM_PASSWORD: $KEEP_OPERATOR_PASSWORD
+            LOG_LEVEL: debug
+            KEEP_ETHEREUM_PASSWORD: ${KEEP_OPERATOR_PASSWORD}
         image: keepnetwork/keep-client:v1.3.0-rc
         command: --config /mnt/keep-beacon-client/config/config.toml start
         restart: always
@@ -31,12 +31,11 @@ services:
         ports:
             - '3919:3919'
         volumes:
-            - '~/.ethereum:/root/.ethereum'
             - '~/ecdsa/persistence:/mnt/keep-ecdsa-client/persistence'
             - '~/ecdsa/config:/mnt/keep-ecdsa-client/config'
         environment:
-            LOG_LEVEL: info
-            KEEP_ETHEREUM_PASSWORD: $KEEP_OPERATOR_PASSWORD
+            LOG_LEVEL: debug
+            KEEP_ETHEREUM_PASSWORD: ${KEEP_OPERATOR_PASSWORD}
         image: keepnetwork/keep-ecdsa-client:v1.2.0-rc
         command: --config /mnt/keep-ecdsa-client/config/config.toml start
         restart: always
