@@ -21,7 +21,7 @@ services:
         environment:
             LOG_LEVEL: debug
             KEEP_ETHEREUM_PASSWORD: ${KEEP_OPERATOR_PASSWORD}
-        image: keepnetwork/keep-client:v1.3.0-rc.3
+        image: keepnetwork/keep-client:v1.3.0-rc.4
         command: --config /mnt/keep-beacon-client/config/config.toml start
         restart: always
     keep-ecdsa:
